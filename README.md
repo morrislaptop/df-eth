@@ -43,6 +43,17 @@ To deploy contracts locally, you'll need to run 2 commands:
 You can import the private key of one of the accounts `hardhat node` created and funded, which are printed when you started the node such as:
 
 ```
+Account #0: 0x1c0f0af3262a7213e59be7f1440282279d788335 (100 ETH)
+Private Key: 0x044c7963e9a89d4f8b64ab23e02e97b2e00dd57fcb60f316ac69b77135003aef
+
 Account #2: 0x3097403b64fe672467345bf159f4c9c5464bd89e (100 ETH)
 Private Key: 0x67195c963ff445314e667112ab22f4a7404bad7f9746564eb409b9bb8c6aed32
 ```
+
+## Player
+
+1. Modify node_modules/@darkforest_eth/contracts/typechain/index.d.ts manually with DarkForestPlayer
+2. Run the node - `hardhat:node`
+3. Deploy the game - `yarn hardhat:dev deploy --whitelist false`
+4. Deploy the player - `yarn hardhat:dev player --core-address 0x6A88Da94d58973C8e69F533cb0CeDb6425551387`
+5. Enter player contract address when starting the game - `0x9b25D251D785902e52ee79a328282217C02Bdc76`

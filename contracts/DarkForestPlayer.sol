@@ -76,6 +76,15 @@ contract DarkForestPlayer {
         return coreContract.initializePlayer(_a, _b, _c, _input);
     }
 
+    function move(
+        uint256[2] memory _a,
+        uint256[2][2] memory _b,
+        uint256[2] memory _c,
+        uint256[13] memory _input
+    ) public returns (uint256) {
+        return coreContract.move(_a, _b, _c, _input);
+    }
+
     /**
      * function move(
         uint256[2] memory _a,

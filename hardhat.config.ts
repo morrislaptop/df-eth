@@ -17,6 +17,7 @@ import './tasks/game';
 import './tasks/gpt-credits';
 import './tasks/subgraph';
 import './tasks/upgrades';
+import './tasks/player';
 import './tasks/utils';
 import './tasks/wallet';
 import './tasks/whitelist';
