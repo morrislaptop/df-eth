@@ -1,5 +1,6 @@
 import {
   DarkForestCore,
+  DarkForestPlayer,
   DarkForestGPTCredit,
   DarkForestScoringRound3,
   Whitelist,
@@ -25,6 +26,8 @@ export interface World {
   user2GPTCredit: DarkForestGPTCredit;
   user1Scoring: DarkForestScoringRound3;
   user2Scoring: DarkForestScoringRound3;
+  user1Player: DarkForestPlayer;
+  user2Player: DarkForestPlayer;
 }
 
 export interface Player {
@@ -86,5 +89,7 @@ export async function initializeWorld(args: InitializeWorldArgs): Promise<World>
     user2GPTCredit: contracts.gptCredits.connect(user2),
     user1Scoring: contracts.scoring.connect(user1),
     user2Scoring: contracts.scoring.connect(user2),
+    user1Player: contracts.player.connect(user1),
+    user2Player: contracts.player.connect(user1),
   };
 }

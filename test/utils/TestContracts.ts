@@ -1,5 +1,6 @@
 import {
   DarkForestCore,
+  DarkForestPlayer,
   DarkForestGetters,
   DarkForestGPTCredit,
   DarkForestPlanet,
@@ -23,6 +24,7 @@ export interface TestContracts {
   getters: DarkForestGetters;
   gptCredits: DarkForestGPTCredit;
   scoring: DarkForestScoringRound3;
+  player: DarkForestPlayer;
 }
 
 export interface InitializeContractArgs {
@@ -130,6 +132,12 @@ export async function initializeContracts({
     initializers.CLAIM_PLANET_COOLDOWN,
   ])) as DarkForestScoringRound3;
 
+  const DarkForestPlayer = await ethers.getContractFactory('DarkForestPlayer');
+  const darkForestPlayer = await DarkForestPlayer.deploy(
+    deployer.address,
+    darkForestCore.address,
+  ) as DarkForestPlayer;
+
   return {
     whitelist,
     tokens: darkForestTokens,
@@ -140,5 +148,6 @@ export async function initializeContracts({
     getters: darkForestGetters,
     gptCredits: darkForestGPTCredit,
     scoring: darkForestScoringContract,
+    player: darkForestPlayer,
   };
 }
