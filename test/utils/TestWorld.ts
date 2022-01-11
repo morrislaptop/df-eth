@@ -20,6 +20,8 @@ export interface World {
   deployer: SignerWithAddress;
   user1Core: DarkForestCore;
   user2Core: DarkForestCore;
+  user1CorePlayer: DarkForestCore;
+  user2CorePlayer: DarkForestCore;
   user1Whitelist: Whitelist;
   user2Whitelist: Whitelist;
   user1GPTCredit: DarkForestGPTCredit;
@@ -83,6 +85,8 @@ export async function initializeWorld(args: InitializeWorldArgs): Promise<World>
     deployer,
     user1Core: contracts.core.connect(user1),
     user2Core: contracts.core.connect(user2),
+    user1CorePlayer: contracts.coreAtPlayer.connect(user1),
+    user2CorePlayer: contracts.coreAtPlayer.connect(user2),
     user1Whitelist: contracts.whitelist.connect(user1),
     user2Whitelist: contracts.whitelist.connect(user2),
     user1GPTCredit: contracts.gptCredits.connect(user1),

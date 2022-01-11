@@ -28,10 +28,12 @@ contract DarkForestPlayer {
         coreContract = _coreContract;
     }
 
-    // call function
-    // fallback() external payable {
-    //     address(coreContract).call(msg.data);
-    // }
+    // call and throw
+    fallback(bytes calldata payload) external payable returns (bytes memory)  {
+        (bool success, bytes memory result) = address(coreContract).call{value: msg.value}(payload);
+        require(success, string(result));
+        return result;
+    }
 
     // delegeate call function
     // fallback() external payable {
@@ -74,14 +76,14 @@ contract DarkForestPlayer {
     // }
 
     // abi call function
-    function initializePlayer(
-        uint256[2] memory _a,
-        uint256[2][2] memory _b,
-        uint256[2] memory _c,
-        uint256[8] memory _input
-    ) external onlyOwner returns (uint256) {
-        return coreContract.initializePlayer(_a, _b, _c, _input);
-    }
+    // function initializePlayer(
+    //     uint256[2] memory _a,
+    //     uint256[2][2] memory _b,
+    //     uint256[2] memory _c,
+    //     uint256[8] memory _input
+    // ) external onlyOwner returns (uint256) {
+    //     return coreContract.initializePlayer(_a, _b, _c, _input);
+    // }
 
     function move(
         uint256[2] memory _a,

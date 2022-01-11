@@ -22,7 +22,7 @@ describe.only('DarkForestPlayer', function () {
   });
 
   it('initializes df player successfully with the correct planet value', async function () {
-    await expect(world.user1Player.initializePlayer(...makeInitArgs(SPAWN_PLANET_1)))
+    await expect(world.user1CorePlayer.initializePlayer(...makeInitArgs(SPAWN_PLANET_1)))
       .to.emit(world.contracts.core, 'PlayerInitialized')
       .withArgs(world.contracts.player.address, SPAWN_PLANET_1.id.toString());
 

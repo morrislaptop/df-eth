@@ -21,6 +21,7 @@ export interface TestContracts {
   utils: DarkForestUtils;
   planet: DarkForestPlanet;
   core: DarkForestCore;
+  coreAtPlayer: DarkForestCore;
   getters: DarkForestGetters;
   gptCredits: DarkForestGPTCredit;
   scoring: DarkForestScoringRound3;
@@ -138,6 +139,8 @@ export async function initializeContracts({
     darkForestCore.address,
   ) as DarkForestPlayer;
 
+  const coreAtPlayer = await ethers.getContractAt('DarkForestCore', darkForestPlayer.address) as DarkForestCore;
+
   return {
     whitelist,
     tokens: darkForestTokens,
@@ -145,6 +148,7 @@ export async function initializeContracts({
     utils: darkForestUtils,
     planet: darkForestPlanet,
     core: darkForestCore,
+    coreAtPlayer,
     getters: darkForestGetters,
     gptCredits: darkForestGPTCredit,
     scoring: darkForestScoringContract,
