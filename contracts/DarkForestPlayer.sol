@@ -11,6 +11,13 @@ contract DarkForestPlayer {
     DarkForestCore immutable public coreContract;
     address public owner;
 
+    struct Move {
+        uint256[2] _a;
+        uint256[2][2] _b;
+        uint256[2] _c;
+        uint256[13] _input;
+    }
+
     modifier onlyOwner() {
         require(msg.sender == owner, "caller not owner");
         _;
@@ -72,7 +79,7 @@ contract DarkForestPlayer {
         uint256[2][2] memory _b,
         uint256[2] memory _c,
         uint256[8] memory _input
-    ) external returns (uint256) {
+    ) external onlyOwner returns (uint256) {
         return coreContract.initializePlayer(_a, _b, _c, _input);
     }
 
@@ -81,8 +88,25 @@ contract DarkForestPlayer {
         uint256[2][2] memory _b,
         uint256[2] memory _c,
         uint256[13] memory _input
-    ) public returns (uint256) {
+    ) public onlyOwner returns (uint256) {
         return coreContract.move(_a, _b, _c, _input);
+    }
+
+    function batchMove(Move[] memory _moves) public onlyOwner returns (uint256) {
+        for (uint i = 0; i < _moves.length; i++) {
+            coreContract.move(_moves[i]._a, _moves[i]._b, _moves[i]._c, _moves[i]._input);
+        }
+    }
+
+    function batchMove2(
+        uint256[2][] memory _as,
+        uint256[2][2][] memory _bs,
+        uint256[2][] memory _cs,
+        uint256[13][] memory _inputs
+    ) public onlyOwner returns (uint256) {
+        for (uint i = 0; i < _as.length; i++) {
+            coreContract.move(_as[i], _bs[i], _cs[i], _inputs[i]);
+        }
     }
 
     /**
